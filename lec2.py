@@ -95,3 +95,84 @@
 # print 'Remaning balance: '+str(round(balance, 2))
 
 ####### Problem 2
+
+# balance_first = float(raw_input('Enter the outstanding balance on your credit card: '))
+# interest = float(raw_input('Enter the annual credit card interest rate as a decimal: '))
+
+# minimum_monthly_paid_upper = (balance_first*(1+(interest/12.0)**12.0)/12.0)
+# minimum_monthly_paid_lower = balance_first/12.0
+
+# minimum_monthly_paid = (minimum_monthly_paid_lower + minimum_monthly_paid_upper)/2
+# monthly_interest = interest/12.0
+# month = 0
+
+# def calc_balance(b, mi, mmp):
+#   m = 1
+
+#   while m < 13:
+#     b = b*(1+mi)-mmp
+#     print m
+#     print b
+
+#     if b < 0:
+#       print m
+#       print mmp
+#       print b
+#       return
+#     else:
+#       m += 1
+
+#   if b > 0:
+#     if mmp >= minimum_monthly_paid:
+#       mmp = (mmp + minimum_monthly_paid_lower)/2
+#     else:
+#       mmp = (mmp + minimum_monthly_paid_upper)/2
+
+#     b = calc_balance (balance_first, monthly_interest, mmp)
+
+# calc_balance (balance_first, monthly_interest, minimum_monthly_paid)
+
+balance_first = float(raw_input('Enter the outstanding balance on your credit card: '))
+interest = float(raw_input('Enter the annual credit card interest rate as a decimal: '))
+
+
+monthly_interest = interest/12.0
+month = 0
+ipsilon = 0.1
+
+minimum_monthly_paid_upper = (balance_first*(1+monthly_interest)**12.0)/12.0
+minimum_monthly_paid_lower = balance_first/12.0
+
+x = 1
+balance = balance_first
+
+while x < 100000:
+
+  minimum_monthly_paid = (minimum_monthly_paid_lower+minimum_monthly_paid_upper)*0.5
+
+  m = 1
+  while m < 13:
+    balance = balance*(1+monthly_interest)-minimum_monthly_paid
+    print m
+    print minimum_monthly_paid
+    print balance
+    m += 1
+
+  print "ROOP END"
+
+  if balance >= 0.1:
+    minimum_monthly_paid_lower = minimum_monthly_paid
+    balance = balance_first
+  elif balance < -0.1: 
+    minimum_monthly_paid_upper = minimum_monthly_paid
+    balance = balance_first
+  else:
+    print balance
+    print "aslfksdjflksdfjsdf"
+    print "MMP" + str(minimum_monthly_paid)
+    break
+  x += 1
+
+print minimum_monthly_paid_lower
+print minimum_monthly_paid_upper
+
